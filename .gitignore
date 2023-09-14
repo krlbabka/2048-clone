@@ -1,3 +1,9 @@
 ﻿/obj/
 /bin/
 /.idea/
+/2048-clone/obj/
+/2048-clone/bin/
+/2048-clone/.idea/
+/2048-clone.Tests/obj/
+/2048-clone.Tests/bin/
+/2048-clone.Tests/.idea/
