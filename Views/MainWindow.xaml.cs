@@ -23,6 +23,7 @@ namespace _2048.Views
         private void StartGame()
         {
             _gameBoard = new Board();
+            GameOverOverlay.Visibility = Visibility.Collapsed;
             UpdateUI();
         }
         
@@ -39,7 +40,7 @@ namespace _2048.Views
                     {
                         Content = tile.Value == 0 ? "" : tile.Value.ToString(),
                         Background = GetBackgroundForValue(tile.Value),
-                        Foreground = GetForegroundForValue(tile.Value),
+                        Foreground = (SolidColorBrush)new BrushConverter().ConvertFrom("#F4EEE0"),
                         VerticalContentAlignment = VerticalAlignment.Center,
                         HorizontalContentAlignment = HorizontalAlignment.Center,
                         Margin = new Thickness(4),
@@ -77,16 +78,13 @@ namespace _2048.Views
 
             if (!_gameBoard.HasMovesLeft())
             {
-                if (MessageBox.Show("Game Over! Do you want to start a new game?", "Game Over", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    StartGame();
-                }
+                GameOverOverlay.Visibility = Visibility.Visible;
             }
         }
         
         private void OnRestartButtonClick(object sender, RoutedEventArgs e)
         {
-            _gameBoard.ResetBoard();
+            StartGame();
         }
         
         private Brush GetBackgroundForValue(int value)

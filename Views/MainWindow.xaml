@@ -11,6 +11,7 @@
             <Setter Property="BorderBrush" Value="#F4EEE0"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <EventSetter Event="Click" Handler="OnRestartButtonClick"/>
         </Style>
     </Window.Resources>
     
@@ -25,8 +26,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Style="{StaticResource NewGameButton}" Content="New Game" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Click="OnRestartButtonClick"/>
-            <TextBlock Grid.Column="1" FontSize="25" Name="Score" Text="Score" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Foreground="White"></TextBlock>
+            <Button Grid.Column="0" Style="{StaticResource NewGameButton}" Content="New Game" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Focusable="False"/>
+            <TextBlock Grid.Column="1" FontSize="25" Name="Score" Text="Score" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Foreground="#F4EEE0"></TextBlock>
         </Grid>
         
         <Grid Name="BoardGrid" Grid.Row="1" Margin="10" >
@@ -42,6 +43,9 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+        </Grid>
+        <Grid Grid.Row="1" Name="GameOverOverlay" Visibility="Collapsed" Background="#DD272829">
+            <TextBlock Text="GAME OVER" FontSize="50" Foreground="#F4EEE0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>
