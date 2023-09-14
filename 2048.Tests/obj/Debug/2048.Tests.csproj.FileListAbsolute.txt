@@ -1,0 +1,12 @@
+C:\Users\Karel\Desktop\School\Program\prvak_letni_cs\Project\2048.Tests\bin\Debug\_2048.Tests.dll
+C:\Users\Karel\Desktop\School\Program\prvak_letni_cs\Project\2048.Tests\bin\Debug\_2048.Tests.pdb
+C:\Users\Karel\Desktop\School\Program\prvak_letni_cs\Project\2048.Tests\bin\Debug\nunit.framework.dll
+C:\Users\Karel\Desktop\School\Program\prvak_letni_cs\Project\2048.Tests\bin\Debug\_2048.exe
+C:\Users\Karel\Desktop\School\Program\prvak_letni_cs\Project\2048.Tests\bin\Debug\_2048.pdb
+C:\Users\Karel\Desktop\School\Program\prvak_letni_cs\Project\2048.Tests\bin\Debug\_2048.exe.config
+C:\Users\Karel\Desktop\School\Program\prvak_letni_cs\Project\2048.Tests\bin\Debug\nunit.framework.xml
+C:\Users\Karel\Desktop\School\Program\prvak_letni_cs\Project\2048.Tests\obj\Debug\2048.Tests.csproj.AssemblyReference.cache
+C:\Users\Karel\Desktop\School\Program\prvak_letni_cs\Project\2048.Tests\obj\Debug\2048.Tests.csproj.CoreCompileInputs.cache
+C:\Users\Karel\Desktop\School\Program\prvak_letni_cs\Project\2048.Tests\obj\Debug\2048.Tests.csproj.CopyComplete
+C:\Users\Karel\Desktop\School\Program\prvak_letni_cs\Project\2048.Tests\obj\Debug\_2048.Tests.dll
+C:\Users\Karel\Desktop\School\Program\prvak_letni_cs\Project\2048.Tests\obj\Debug\_2048.Tests.pdb

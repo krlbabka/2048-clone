@@ -9,12 +9,9 @@ namespace _2048.Models
         private readonly Tile[,] _tiles = new Tile[Size,Size];
         private readonly Random _random = new Random();
         public int Score { get; private set; }
-
-        public Board()
-        {
-            ResetBoard();
-        }
         
+        
+        // Directions for possible tile moves.
         public enum Direction
         {
             Up,
@@ -23,8 +20,16 @@ namespace _2048.Models
             Right
         }
         
+        // Initializes the board with all zeros and two random tiles.
+        public Board()
+        {
+            ResetBoard();
+        }
+        
+        // Resets the board to its initial state.
         public void ResetBoard()
         {
+            // Initialize tiles in board with zeros.
             for (var i = 0; i < Size; i++)
             {
                 for (var j = 0; j < Size; j++)
@@ -33,6 +38,7 @@ namespace _2048.Models
                 }
             }
 
+            // Add two random tiles and reset score for game start
             AddRandomTile();
             AddRandomTile();
             Score = 0;
@@ -43,10 +49,12 @@ namespace _2048.Models
             return _tiles[row, col];
         }
         
+        // Add a random 2(90%) or 4(10%) tile to an available spot on the board.
         private void AddRandomTile()
         {
             List<(int, int)> availableTiles = new List<(int, int)>();
 
+            // Empty tiles
             for (int i = 0; i < Size; i++)
             {
                 for (int j = 0; j < Size; j++)
@@ -57,7 +65,8 @@ namespace _2048.Models
                     }
                 }
             }
-
+            
+            // Add a random tile into an empty spot
             if (availableTiles.Count > 0)
             {
                 var position = availableTiles[_random.Next(availableTiles.Count)];
@@ -65,6 +74,7 @@ namespace _2048.Models
             }
         }
 
+        // Moves tiles in the specified direction, merges tiles if possible, and adds a random tile
         public void Move(Direction direction)
         {
             if (!CanMove(direction, _tiles)) return;
@@ -89,6 +99,7 @@ namespace _2048.Models
             AddRandomTile();
         }
 
+        // Methods for moving tiles in each direction.
         public void MoveLeft()
         {
             for (var row = 0; row < Size; row++)
@@ -213,6 +224,7 @@ namespace _2048.Models
             }
         }
         
+        // Checks if there are any possible moves left
         public bool HasMovesLeft()
         {
             // Check for empty tiles
@@ -248,6 +260,7 @@ namespace _2048.Models
             return false;
         }
         
+        // Determines if a direction is a valid move
         bool CanMove(Direction direction, Tile[,] tiles)
         {
             switch (direction)

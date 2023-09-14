@@ -27,15 +27,17 @@ namespace _2048.Views
             UpdateUI();
         }
         
+        // Refresh UI based on board's state
         private void UpdateUI()
         {
             BoardGrid.Children.Clear();
 
+            // Populate UI grid with tiles from game board
             for (int i = 0; i < Size; i++)
             {
                 for (int j = 0; j < Size; j++)
                 {
-                    var tile = _gameBoard.GetTileAt(i, j); // You'll need to add this function to your Board class.
+                    var tile = _gameBoard.GetTileAt(i, j);
                     var label = new Label
                     {
                         Content = tile.Value == 0 ? "" : tile.Value.ToString(),
@@ -54,6 +56,7 @@ namespace _2048.Views
             }
         }
         
+        // Keyboard inputs for tile movements
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
             base.OnPreviewKeyDown(e);
@@ -74,6 +77,7 @@ namespace _2048.Views
                     break;
             }
 
+            // Update UI & check end-game condition
             UpdateUI();
 
             if (!_gameBoard.HasMovesLeft())
@@ -82,11 +86,13 @@ namespace _2048.Views
             }
         }
         
+        // Game restart button
         private void OnRestartButtonClick(object sender, RoutedEventArgs e)
         {
             StartGame();
         }
         
+        // Tile color scheme
         private Brush GetBackgroundForValue(int value)
         {
             switch (value)
@@ -104,14 +110,6 @@ namespace _2048.Views
                 case 1024: return (SolidColorBrush)new BrushConverter().ConvertFrom("#7A627A");
                 case 2048: return (SolidColorBrush)new BrushConverter().ConvertFrom("#7A627A");
                 default: return (SolidColorBrush)new BrushConverter().ConvertFrom("#7A627A");
-            }
-        }
-
-        private Brush GetForegroundForValue(int value)
-        {
-            switch (value)
-            {
-                default: return Brushes.White;
             }
         }
     }
