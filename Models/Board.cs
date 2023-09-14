@@ -8,13 +8,14 @@ namespace _2048.Models
         private const int Size = 4;
         private readonly Tile[,] _tiles = new Tile[Size,Size];
         private readonly Random _random = new Random();
+        public int Score { get; private set; }
 
         public Board()
         {
             ResetBoard();
         }
         
-        private enum Direction
+        public enum Direction
         {
             Up,
             Down,
@@ -22,11 +23,11 @@ namespace _2048.Models
             Right
         }
         
-        private void ResetBoard()
+        public void ResetBoard()
         {
-            for (int i = 0; i < Size; i++)
+            for (var i = 0; i < Size; i++)
             {
-                for (int j = 0; j < Size; j++)
+                for (var j = 0; j < Size; j++)
                 {
                     _tiles[i, j] = new Tile(0, i, j);
                 }
@@ -34,9 +35,14 @@ namespace _2048.Models
 
             AddRandomTile();
             AddRandomTile();
-            Display();
+            Score = 0;
         }
 
+        public Tile GetTileAt(int row, int col)
+        {
+            return _tiles[row, col];
+        }
+        
         private void AddRandomTile()
         {
             List<(int, int)> availableTiles = new List<(int, int)>();
@@ -59,7 +65,7 @@ namespace _2048.Models
             }
         }
 
-        private void Move(Direction direction)
+        public void Move(Direction direction)
         {
             if (!CanMove(direction, _tiles)) return;
             
@@ -83,7 +89,7 @@ namespace _2048.Models
             AddRandomTile();
         }
 
-        private void MoveLeft()
+        public void MoveLeft()
         {
             for (var row = 0; row < Size; row++)
             {
@@ -107,7 +113,7 @@ namespace _2048.Models
             }
         }
 
-        private void MoveUp()
+        public void MoveUp()
         {
             for (var col = 0; col < Size; col++)
             {
@@ -131,7 +137,7 @@ namespace _2048.Models
             }
         }
 
-        private void MoveRight()
+        public void MoveRight()
         {
             for (var row = 0; row < Size; row++)
             {
@@ -155,7 +161,7 @@ namespace _2048.Models
             }
         }
 
-        private void MoveDown()
+        public void MoveDown()
         {
             for (var col = 0; col < Size; col++)
             {
@@ -202,11 +208,12 @@ namespace _2048.Models
                     tiles[i].Value *= 2;
                     tiles[i].SetMergeStatus(true);
                     tiles.RemoveAt(i + 1);
+                    Score += tiles[i].Value;
                 }
             }
         }
         
-        private bool HasMovesLeft()
+        public bool HasMovesLeft()
         {
             // Check for empty tiles
             for (var i = 0; i < Size; i++)
@@ -303,59 +310,6 @@ namespace _2048.Models
             }
 
             return false;
-        }
-        
-        private void Display()
-        {
-            for (var i = 0; i < Size; i++)
-            {
-                for (var j = 0; j < Size; j++)
-                {
-                    Console.Write($"{_tiles[i,j].Value}\t");
-                }
-                Console.WriteLine();
-            }
-        }
-        
-        public void DebugPlay()
-        {
-            while (true)
-            {
-                Console.WriteLine(" ----- ");
-                var input = Console.ReadLine();
-
-                if (input == "R" || input == "L" || input == "U" || input == "D")
-                {
-                    switch (input)
-                    {
-                        case "R":
-                            Move(Direction.Right);
-                            break;
-                        case "L":
-                            Move(Direction.Left);
-                            break;
-                        case "U":
-                            Move(Direction.Up);
-                            break;
-                        case "D":
-                            Move(Direction.Down);
-                            break;
-                    }
-            
-                    Display();
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input. Please enter R, L, U, or D.");
-                }
-        
-                // Check if the game is over
-                if (!HasMovesLeft())
-                {
-                    Console.WriteLine("Game Over!");
-                    break;
-                }
-            }
         }
     }
 }

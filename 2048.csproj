@@ -56,14 +56,14 @@
             <DependentUpon>App.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Compile Include="View\MainWindow.xaml.cs">
+        <Compile Include="Views\MainWindow.xaml.cs">
           <DependentUpon>MainWindow.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Model\Board.cs" />
-        <Compile Include="Model\Tile.cs" />
+        <Compile Include="Models\Board.cs" />
+        <Compile Include="Models\Tile.cs" />
         <Compile Include="Properties\AssemblyInfo.cs">
             <SubType>Code</SubType>
         </Compile>
@@ -81,7 +81,7 @@
         <None Include="App.config"/>
     </ItemGroup>
     <ItemGroup>
-      <Page Include="View\MainWindow.xaml">
+      <Page Include="Views\MainWindow.xaml">
         <Generator>MSBuild:Compile</Generator>
         <SubType>Designer</SubType>
       </Page>

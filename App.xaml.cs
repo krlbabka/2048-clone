@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using _2048.Models;
+using _2048.Views;
 
 namespace _2048
 {
@@ -11,11 +11,8 @@ namespace _2048
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-    
-            Board gameBoard = new Board();
-            gameBoard.DebugPlay();
-
-            Shutdown();
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
         }
     }
 }
