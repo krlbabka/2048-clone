@@ -14,6 +14,14 @@ namespace _2048.Models
             ResetBoard();
         }
         
+        private enum Direction
+        {
+            Up,
+            Down,
+            Left,
+            Right
+        }
+        
         private void ResetBoard()
         {
             for (int i = 0; i < Size; i++)
@@ -51,23 +59,28 @@ namespace _2048.Models
             }
         }
 
-        public void Move(string direction)
+        private void Move(Direction direction)
         {
+            if (!CanMove(direction, _tiles)) return;
+            
             switch (direction)
             {
-                case "L":
+                case Direction.Left:
                     MoveLeft();
                     break;
-                case "U":
+                case Direction.Up:
                     MoveUp();
                     break;
-                case "R":
+                case Direction.Right:
                     MoveRight();
                     break;
-                case "D":
+                case Direction.Down:
                     MoveDown();
                     break;
             }
+            
+            // After each move, add a random tile.
+            AddRandomTile();
         }
 
         private void MoveLeft()
@@ -142,7 +155,7 @@ namespace _2048.Models
             }
         }
 
-        public void MoveDown()
+        private void MoveDown()
         {
             for (var col = 0; col < Size; col++)
             {
@@ -193,17 +206,102 @@ namespace _2048.Models
             }
         }
         
-        public bool HasMovesLeft()
+        private bool HasMovesLeft()
         {
-            for (int i = 0; i < Size; i++)
+            // Check for empty tiles
+            for (var i = 0; i < Size; i++)
             {
-                for (int j = 0; j < Size; j++)
+                for (var j = 0; j < Size; j++)
                 {
-                    if (_tiles[i, j].Value == 0) return true;
+                    if (_tiles[i, j].Value == 0) 
+                        return true;
                 }
             }
             
-            // TODO: cases whether moves are possible
+            // Check for possible merge
+            for (var i = 0; i < Size; i++)
+            {
+                for (var j = 0; j < Size-1; j++)
+                {
+                    if (_tiles[i, j].Value == _tiles[i, j+1].Value) 
+                        return true;
+                }
+            }
+            
+            // Check for possible merge
+            for (var j = 0; j < Size; j++)
+            {
+                for (var i = 0; i < Size-1; i++)
+                {
+                    if (_tiles[i, j].Value == _tiles[i+1, j].Value) 
+                        return true;
+                }
+            }
+            
+            return false;
+        }
+        
+        bool CanMove(Direction direction, Tile[,] tiles)
+        {
+            switch (direction)
+            {
+                case Direction.Up:
+                    for (int j = 0; j < Size; j++)
+                    {
+                        for (int i = 1; i < Size; i++)
+                        {
+                            if (tiles[i, j].Value != 0) 
+                            {
+                                if (tiles[i-1, j].Value == 0 || tiles[i-1, j].Value == tiles[i, j].Value)
+                                    return true;
+                            }
+                        }
+                    }
+                    break;
+
+                case Direction.Down:
+                    for (int j = 0; j < Size; j++)
+                    {
+                        for (int i = Size - 2; i >= 0; i--)
+                        {
+                            if (tiles[i, j].Value != 0) 
+                            {
+                                if (tiles[i+1, j].Value == 0 || tiles[i+1, j].Value == tiles[i, j].Value)
+                                    return true;
+                            }
+                        }
+                    }
+                    break;
+
+                case Direction.Left:
+                    for (int i = 0; i < Size; i++)
+                    {
+                        for (int j = 1; j < Size; j++)
+                        {
+                            if (tiles[i, j].Value != 0) 
+                            {
+                                if (tiles[i, j-1].Value == 0 || tiles[i, j-1].Value == tiles[i, j].Value)
+                                    return true;
+                            }
+                        }
+                    }
+                    break;
+
+                case Direction.Right:
+                    for (int i = 0; i < Size; i++)
+                    {
+                        for (int j = Size - 2; j >= 0; j--)
+                        {
+                            if (tiles[i, j].Value != 0) 
+                            {
+                                if (tiles[i, j+1].Value == 0 || tiles[i, j+1].Value == tiles[i, j].Value)
+                                    return true;
+                            }
+                        }
+                    }
+                    break;
+            }
+
             return false;
         }
         
@@ -228,10 +326,22 @@ namespace _2048.Models
 
                 if (input == "R" || input == "L" || input == "U" || input == "D")
                 {
-                    Move(input);
+                    switch (input)
+                    {
+                        case "R":
+                            Move(Direction.Right);
+                            break;
+                        case "L":
+                            Move(Direction.Left);
+                            break;
+                        case "U":
+                            Move(Direction.Up);
+                            break;
+                        case "D":
+                            Move(Direction.Down);
+                            break;
+                    }
             
-                    // After each move, add a random tile.
-                    AddRandomTile();
                     Display();
                 }
                 else
