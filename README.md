@@ -8,9 +8,9 @@
 
 1. **Zahájení hry**: Po spuštění hry se zobrazí mřížka se dvěma dlaždicemi, které mají hodnotu `2`, nebo vzácněji `4`.
 
-2. **Přesunutí dlaždic**: Pomocí kláves se šipkami nebo WASD (`Nahoru`, `Vlevo`, `Dolů`, `Vpravo`) se posouvají všechny destičky na hrací ploše zvoleným směrem až ke kraji.
+2. **Přesouvání destiček**: Pomocí kláves se šipkami nebo WASD (`Nahoru`, `Vlevo`, `Dolů`, `Vpravo`) se posouvají všechny destičky na hrací ploše zvoleným směrem až ke kraji.
 
-3. **Spojování dlaždic**: Když se dvě destičky se stejnou hodnotou setkají, spojí se do jedné se svou kombinovanou hodnotou.
+3. **Spojování destiček**: Když se dvě destičky se stejnou hodnotou setkají, spojí se do jedné se svou kombinovanou hodnotou.
 
     - Například dvě destičky `2` se spojí na destičku `4`, dvě destičky `4` vytvoří `8` atd.
 
