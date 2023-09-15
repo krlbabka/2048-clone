@@ -6,18 +6,18 @@ namespace _2048.Tests
     [TestFixture]
     public class BoardTests
     {
-        private Board _board;
+        private Board board;
 
         [SetUp]
         public void Setup()
         {
-            _board = new Board();
+            board = new Board();
             
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    _board.GetTileAt(i, j).Value = 0;
+                    board.GetTileAt(i, j).Value = 0;
                 }
             }
         }
@@ -28,13 +28,13 @@ namespace _2048.Tests
             // Setup
             int nonZeroTiles = 0;
 
-            _board.ResetBoard();
+            board.ResetBoard();
 
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    if (_board.GetTileAt(i, j).Value > 0)
+                    if (board.GetTileAt(i, j).Value > 0)
                     {
                         nonZeroTiles++;
                     }
@@ -49,10 +49,10 @@ namespace _2048.Tests
         public void ResetBoard_SetsScoreToZero()
         {
             // Act
-            _board.ResetBoard();
+            board.ResetBoard();
 
             // Assert
-            Assert.AreEqual(0, _board.Score);
+            Assert.AreEqual(0, board.Score);
         }
 
         [Test]
@@ -63,24 +63,24 @@ namespace _2048.Tests
             // 0 2 0 0
             // 0 0 0 0
             // 0 0 0 2
-            _board.GetTileAt(0, 0).Value = 2;
-            _board.GetTileAt(1, 1).Value = 2;
-            _board.GetTileAt(0, 2).Value = 2;
-            _board.GetTileAt(0, 3).Value = 8;
-            _board.GetTileAt(3, 3).Value = 2;
+            board.GetTileAt(0, 0).Value = 2;
+            board.GetTileAt(1, 1).Value = 2;
+            board.GetTileAt(0, 2).Value = 2;
+            board.GetTileAt(0, 3).Value = 8;
+            board.GetTileAt(3, 3).Value = 2;
 
-            _board.Move(Board.Direction.Down);
+            board.Move(Board.Direction.Down);
             
             // Assert
             // 0 0 0 0
             // 0 0 0 0
             // 0 0 0 8
             // 2 2 2 2
-            Assert.AreEqual(2, _board.GetTileAt(3, 0).Value);
-            Assert.AreEqual(2, _board.GetTileAt(3, 1).Value);
-            Assert.AreEqual(2, _board.GetTileAt(3, 2).Value);
-            Assert.AreEqual(2, _board.GetTileAt(3, 3).Value);
-            Assert.AreEqual(8, _board.GetTileAt(2, 3).Value);
+            Assert.AreEqual(2, board.GetTileAt(3, 0).Value);
+            Assert.AreEqual(2, board.GetTileAt(3, 1).Value);
+            Assert.AreEqual(2, board.GetTileAt(3, 2).Value);
+            Assert.AreEqual(2, board.GetTileAt(3, 3).Value);
+            Assert.AreEqual(8, board.GetTileAt(2, 3).Value);
         }
         
         [Test]
@@ -91,24 +91,24 @@ namespace _2048.Tests
             // 0 2 0 0
             // 2 0 4 0
             // 0 0 0 2
-            _board.GetTileAt(0, 2).Value = 2;
-            _board.GetTileAt(1, 1).Value = 2;
-            _board.GetTileAt(2, 0).Value = 2;
-            _board.GetTileAt(2, 2).Value = 4;
-            _board.GetTileAt(3, 3).Value = 2;
+            board.GetTileAt(0, 2).Value = 2;
+            board.GetTileAt(1, 1).Value = 2;
+            board.GetTileAt(2, 0).Value = 2;
+            board.GetTileAt(2, 2).Value = 4;
+            board.GetTileAt(3, 3).Value = 2;
 
-            _board.Move(Board.Direction.Right);
+            board.Move(Board.Direction.Right);
             
             // Assert
             // 0 0 0 2
             // 0 0 0 2
             // 0 0 2 4
             // 0 0 0 2
-            Assert.AreEqual(2, _board.GetTileAt(0, 3).Value);
-            Assert.AreEqual(2, _board.GetTileAt(1, 3).Value);
-            Assert.AreEqual(2, _board.GetTileAt(2, 2).Value);
-            Assert.AreEqual(4, _board.GetTileAt(2, 3).Value);
-            Assert.AreEqual(2, _board.GetTileAt(3, 3).Value);
+            Assert.AreEqual(2, board.GetTileAt(0, 3).Value);
+            Assert.AreEqual(2, board.GetTileAt(1, 3).Value);
+            Assert.AreEqual(2, board.GetTileAt(2, 2).Value);
+            Assert.AreEqual(4, board.GetTileAt(2, 3).Value);
+            Assert.AreEqual(2, board.GetTileAt(3, 3).Value);
         }
 
         [Test]
@@ -119,23 +119,23 @@ namespace _2048.Tests
             // 0 0 0 0
             // 0 0 0 0
             // 0 0 0 0
-            _board.GetTileAt(0, 0).Value = 2;
-            _board.GetTileAt(0, 1).Value = 2;
-            _board.GetTileAt(0, 2).Value = 2;
-            _board.GetTileAt(0, 3).Value = 2;
+            board.GetTileAt(0, 0).Value = 2;
+            board.GetTileAt(0, 1).Value = 2;
+            board.GetTileAt(0, 2).Value = 2;
+            board.GetTileAt(0, 3).Value = 2;
 
-            _board.Move(Board.Direction.Left);
+            board.Move(Board.Direction.Left);
 
             // Assert
             // 4 4 0 0
             // 0 0 0 0
             // 0 0 0 0
             // 0 0 0 0
-            Assert.AreEqual(4, _board.GetTileAt(0, 0).Value);
-            Assert.AreEqual(4, _board.GetTileAt(0, 1).Value);
-            Assert.AreEqual(0, _board.GetTileAt(0, 2).Value);
-            Assert.AreEqual(0, _board.GetTileAt(0, 3).Value);
-            Assert.AreEqual(true, _board.CanMove(Board.Direction.Left, _board._tiles));
+            Assert.AreEqual(4, board.GetTileAt(0, 0).Value);
+            Assert.AreEqual(4, board.GetTileAt(0, 1).Value);
+            Assert.AreEqual(0, board.GetTileAt(0, 2).Value);
+            Assert.AreEqual(0, board.GetTileAt(0, 3).Value);
+            Assert.AreEqual(true, board.CanMove(Board.Direction.Left, board.tiles));
         }
         
         [Test]
@@ -146,18 +146,18 @@ namespace _2048.Tests
             // 0 0 0 0
             // 0 0 0 0
             // 0 0 0 0
-            _board.GetTileAt(0, 0).Value = 2;
-            _board.GetTileAt(0, 3).Value = 2;
+            board.GetTileAt(0, 0).Value = 2;
+            board.GetTileAt(0, 3).Value = 2;
 
-            _board.Move(Board.Direction.Right);
+            board.Move(Board.Direction.Right);
 
             // Assert
             // 0 0 0 4
             // 0 0 0 0
             // 0 0 0 0
             // 0 0 0 0
-            Assert.AreEqual(0, _board.GetTileAt(0, 0).Value);
-            Assert.AreEqual(4, _board.GetTileAt(0, 3).Value);
+            Assert.AreEqual(0, board.GetTileAt(0, 0).Value);
+            Assert.AreEqual(4, board.GetTileAt(0, 3).Value);
         }
         
         [Test]
@@ -168,22 +168,22 @@ namespace _2048.Tests
             // 2 0 0 0
             // 2 0 0 0
             // 2 0 0 0
-            _board.GetTileAt(0, 0).Value = 2;
-            _board.GetTileAt(1, 0).Value = 2;
-            _board.GetTileAt(2, 0).Value = 2;
-            _board.GetTileAt(3, 0).Value = 2;
+            board.GetTileAt(0, 0).Value = 2;
+            board.GetTileAt(1, 0).Value = 2;
+            board.GetTileAt(2, 0).Value = 2;
+            board.GetTileAt(3, 0).Value = 2;
 
-            _board.Move(Board.Direction.Up);
+            board.Move(Board.Direction.Up);
 
             // Assert
             // 4 0 0 0
             // 4 0 0 0
             // 0 0 0 0
             // 0 0 0 0
-            Assert.AreEqual(4, _board.GetTileAt(0, 0).Value);
-            Assert.AreEqual(4, _board.GetTileAt(1, 0).Value);
-            Assert.AreEqual(0, _board.GetTileAt(2, 0).Value);
-            Assert.AreEqual(0, _board.GetTileAt(3, 0).Value);
+            Assert.AreEqual(4, board.GetTileAt(0, 0).Value);
+            Assert.AreEqual(4, board.GetTileAt(1, 0).Value);
+            Assert.AreEqual(0, board.GetTileAt(2, 0).Value);
+            Assert.AreEqual(0, board.GetTileAt(3, 0).Value);
         }
         
         [Test]
@@ -194,18 +194,18 @@ namespace _2048.Tests
             // 0 0 0 0
             // 0 0 0 0
             // 2 0 0 0
-            _board.GetTileAt(0, 0).Value = 2;
-            _board.GetTileAt(3, 0).Value = 2;
+            board.GetTileAt(0, 0).Value = 2;
+            board.GetTileAt(3, 0).Value = 2;
 
-            _board.Move(Board.Direction.Down);
+            board.Move(Board.Direction.Down);
 
             // Assert
             // 0 0 0 0
             // 0 0 0 0
             // 0 0 0 0
             // 4 0 0 0
-            Assert.AreEqual(0, _board.GetTileAt(0, 0).Value);
-            Assert.AreEqual(4, _board.GetTileAt(3, 0).Value);
+            Assert.AreEqual(0, board.GetTileAt(0, 0).Value);
+            Assert.AreEqual(4, board.GetTileAt(3, 0).Value);
         }
 
         [Test]
@@ -216,12 +216,12 @@ namespace _2048.Tests
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    _board.GetTileAt(i, j).Value = (i + j) % 2 == 0 ? 4 : 2;
+                    board.GetTileAt(i, j).Value = (i + j) % 2 == 0 ? 4 : 2;
                 }
             }
 
             // Assert
-            Assert.IsFalse(_board.HasMovesLeft());
+            Assert.IsFalse(board.HasMovesLeft());
         }
         
         [Test]
@@ -232,18 +232,18 @@ namespace _2048.Tests
             // 0 0 0 0
             // 0 0 0 0
             // 0 0 0 0
-            _board.GetTileAt(0, 0).Value = 4;
-            _board.GetTileAt(0, 1).Value = 4;
-            _board.Score = 0;
+            board.GetTileAt(0, 0).Value = 4;
+            board.GetTileAt(0, 1).Value = 4;
+            board.Score = 0;
 
-            _board.Move(Board.Direction.Left);
+            board.Move(Board.Direction.Left);
 
             // Assert
             // 0 0 0 4
             // 0 0 0 0
             // 0 0 0 0
             // 0 0 0 0
-            Assert.AreEqual(8, _board.Score);
+            Assert.AreEqual(8, board.Score);
         }
     }
 }

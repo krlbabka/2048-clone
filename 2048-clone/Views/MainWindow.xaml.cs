@@ -13,7 +13,7 @@ namespace _2048.Views
     public partial class MainWindow
     {
         private const int Size = 4;
-        private Board _gameBoard;
+        private Board gameBoard;
         
         public MainWindow()
         {
@@ -23,7 +23,7 @@ namespace _2048.Views
         
         private void StartGame()
         {
-            _gameBoard = new Board();
+            gameBoard = new Board();
             GameOverOverlay.Visibility = Visibility.Collapsed;
             UpdateUI();
         }
@@ -38,7 +38,7 @@ namespace _2048.Views
             {
                 for (int j = 0; j < Size; j++)
                 {
-                    var tile = _gameBoard.GetTileAt(i, j);
+                    var tile = gameBoard.GetTileAt(i, j);
                     var label = new Label
                     {
                         Content = tile.Value == 0 ? "" : tile.Value.ToString(),
@@ -52,7 +52,7 @@ namespace _2048.Views
                     Grid.SetRow(label, i);
                     Grid.SetColumn(label, j);
                     BoardGrid.Children.Add(label);
-                    Score.Text = _gameBoard.Score.ToString();
+                    Score.Text = gameBoard.Score.ToString();
                 }
             }
         }
@@ -83,16 +83,16 @@ namespace _2048.Views
                     break;
             }
 
-            if (moveDirection.HasValue && _gameBoard.CanMove(moveDirection.Value, _gameBoard._tiles))
+            if (moveDirection.HasValue && gameBoard.CanMove(moveDirection.Value, gameBoard.tiles))
             {
-                _gameBoard.Move(moveDirection.Value);
-                _gameBoard.AddRandomTile();
+                gameBoard.Move(moveDirection.Value);
+                gameBoard.AddRandomTile();
             }
 
             // Update UI & check end-game condition
             UpdateUI();
 
-            if (!_gameBoard.HasMovesLeft())
+            if (!gameBoard.HasMovesLeft())
             {
                 GameOverOverlay.Visibility = Visibility.Visible;
             }

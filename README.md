@@ -14,13 +14,13 @@
 
     - Například dvě destičky `2` se spojí na destičku `4`, dvě destičky `4` vytvoří `8` atd.
 
-4. **Konec hry**: Hra končí, jakmile je hrací deska plná a není již žádný tah, který by mohl kombinovat destičky. Snažíte se pokračovat ve hře co nejdéle a dosáhnout nejvyššího skóre.
+4. **Konec hry**: Hra končí, jakmile je hrací plocha plná a není již žádný tah, který by mohl kombinovat destičky. Snažíte se pokračovat ve hře co nejdéle a dosáhnout nejvyššího skóre.
 
 5. **Znovuzahájení hry**: Chcete-li zahájit novou hru, klikněte na tlačítko `New Game`.
 
 ### Rozhraní hry
 
-- **Herní deska**: Toto je herní 4x4 mřížka, na které se zobrazují destičky s čísly.
+- **Hrací plocha**: Toto je herní 4x4 mřížka, na které se zobrazují destičky s čísly.
 
 - **Skóre**: V pravém horním rohu se nachází vaše aktuální skóre. Vaše skóre se zvyšuje o spojenou hodnotu destičkek pokaždé, když jsou dvě zkombinované.
 
@@ -47,7 +47,7 @@ Třída `Tile` reprezentuje jednu destičku na hrací ploše, konkrétně její 
    - `HasMerged`: Boolean udávající, zda se destičky během aktuálního tahu účastnila sloučení.
    - `Row` & `Column`: Poloha na hrací ploše.
 2. Metody
-   - `SetMergeStatus(bool status)`: Pomocná metoda pro nastavení stavu `HasMerged` dlaždice.
+   - `SetMergeStatus(bool status)`: Pomocná metoda pro nastavení stavu `HasMerged` destičky.
 
 #### Board.cs
 
@@ -72,7 +72,7 @@ Třída `Board` představuje herní plochu a hlavní kostru pro hru 2048. Je zod
 
 #### MainWindow.xaml
 
-Jedná se o primární soubor pro rozvržení uživatelského rozhraní hry:
+Jedná se o primární soubor pro rozvržení uživatelského rozhraní hry.
 
 1. **Window Resources**: Obsahuje styl `NewGameButton`, který definuje vzhled a chování tlačítka "New Game".
 2. **Grid Layout**: Aplikace používá k rozvržení především grid. Vnořené gridy zpracovávají herní plochu a ovládací prvky hry.
@@ -80,11 +80,11 @@ Jedná se o primární soubor pro rozvržení uživatelského rozhraní hry:
 
 #### MainWindow.xaml.cs
 
-Tento soubor obsahuje kód pro soubor `MainWindow.xaml`. Je zodpovědný za inicializci a ovládání hry a aktualizaci uživatelského rozhraní.
+Tento soubor obsahuje kód pro soubor `MainWindow.xaml`. Je zodpovědný za inicializaci a ovládání hry a aktualizaci uživatelského rozhraní.
 
 1. **Proměnné**:
     - `Size`: Konstanta velikosti herní plochy.
-    - `_gameBoard`: Instance třídy `Board`, která reprezentuje aktuální stav hry.
+    - `gameBoard`: Instance třídy `Board`, která reprezentuje aktuální stav hry.
 
 2. **Key Events**:
     - `OnPreviewKeyDown`: Detekuje stisknutí klávesy se šipkou / kláves WASD a podle toho posouvá destičky a přidá náhodnou dlaždici, pokud je přesun platný.
@@ -92,7 +92,7 @@ Tento soubor obsahuje kód pro soubor `MainWindow.xaml`. Je zodpovědný za inic
 3. Metody a funkce
 
    1. **StartGame()**: Inicializuje nebo resetuje herní plochu a skóre.
-   2. **UpdateUI()**: Aktualizuje uživatelské rozhraní herní plochy tak, aby odpovídalo stavu `_gameBoard`.
+   2. **UpdateUI()**: Aktualizuje uživatelské rozhraní herní plochy tak, aby odpovídalo stavu `gameBoard`.
    3. **OnRestartButtonClick()**: Obsluha události pro tlačítko `New Game`, restartuje hru.
    4. **GetBackgroundForValue()**: Vrací barvy pozadí podle hodnot dlaždic.
 

@@ -6,8 +6,8 @@ namespace _2048.Models
     public class Board
     {
         private const int Size = 4;
-        public readonly Tile[,] _tiles = new Tile[Size,Size];
-        private readonly Random _random = new Random();
+        public readonly Tile[,] tiles = new Tile[Size,Size];
+        private readonly Random random = new Random();
         public int Score { get; set; }
         
         
@@ -34,7 +34,7 @@ namespace _2048.Models
             {
                 for (var j = 0; j < Size; j++)
                 {
-                    _tiles[i, j] = new Tile(0, i, j);
+                    tiles[i, j] = new Tile(0, i, j);
                 }
             }
 
@@ -46,7 +46,7 @@ namespace _2048.Models
 
         public Tile GetTileAt(int row, int col)
         {
-            return _tiles[row, col];
+            return tiles[row, col];
         }
         
         // Add a random 2(90%) or 4(10%) tile to an available spot on the board.
@@ -59,7 +59,7 @@ namespace _2048.Models
             {
                 for (int j = 0; j < Size; j++)
                 {
-                    if (_tiles[i,j].Value == 0)
+                    if (tiles[i,j].Value == 0)
                     {
                         availableTiles.Add((i,j));
                     }
@@ -69,15 +69,15 @@ namespace _2048.Models
             // Add a random tile into an empty spot
             if (availableTiles.Count > 0)
             {
-                var position = availableTiles[_random.Next(availableTiles.Count)];
-                _tiles[position.Item1, position.Item2] = new Tile(_random.Next(0, 10) == 0 ? 4 : 2, position.Item1, position.Item2);
+                var position = availableTiles[random.Next(availableTiles.Count)];
+                tiles[position.Item1, position.Item2] = new Tile(random.Next(0, 10) == 0 ? 4 : 2, position.Item1, position.Item2);
             }
         }
 
         // Moves tiles in the specified direction
         public void Move(Direction direction)
         {
-            if (!CanMove(direction, _tiles)) return;
+            if (!CanMove(direction, tiles)) return;
             
             switch (direction)
             {
@@ -109,13 +109,13 @@ namespace _2048.Models
                 {
                     if (i < tiles.Count)
                     {
-                        _tiles[row, i] = tiles[i];
-                        _tiles[row, i].Column = i;
-                        _tiles[row, i].SetMergeStatus(false);
+                        this.tiles[row, i] = tiles[i];
+                        this.tiles[row, i].Column = i;
+                        this.tiles[row, i].SetMergeStatus(false);
                     }
                     else
                     {
-                        _tiles[row, i] = new Tile(0, row, i);
+                        this.tiles[row, i] = new Tile(0, row, i);
                     }
                 }
             }
@@ -133,13 +133,13 @@ namespace _2048.Models
                 {
                     if (i < tiles.Count)
                     {
-                        _tiles[i, col] = tiles[i];
-                        _tiles[i, col].Row = i;
-                        _tiles[i, col].SetMergeStatus(false);
+                        this.tiles[i, col] = tiles[i];
+                        this.tiles[i, col].Row = i;
+                        this.tiles[i, col].SetMergeStatus(false);
                     }
                     else
                     {
-                        _tiles[i, col] = new Tile(0, i, col);
+                        this.tiles[i, col] = new Tile(0, i, col);
                     }
                 }
             }
@@ -157,13 +157,13 @@ namespace _2048.Models
                 {
                     if (i >= Size - tiles.Count)
                     {
-                        _tiles[row, i] = tiles[Size - 1 - i];
-                        _tiles[row, i].Column = i;
-                        _tiles[row, i].SetMergeStatus(false);
+                        this.tiles[row, i] = tiles[Size - 1 - i];
+                        this.tiles[row, i].Column = i;
+                        this.tiles[row, i].SetMergeStatus(false);
                     }
                     else
                     {
-                        _tiles[row, i] = new Tile(0, row, i);
+                        this.tiles[row, i] = new Tile(0, row, i);
                     }
                 }
             }
@@ -181,13 +181,13 @@ namespace _2048.Models
                 {
                     if (i >= Size - tiles.Count)
                     {
-                        _tiles[i, col] = tiles[Size - 1 - i];
-                        _tiles[i, col].Row = i;
-                        _tiles[i, col].SetMergeStatus(false);
+                        this.tiles[i, col] = tiles[Size - 1 - i];
+                        this.tiles[i, col].Row = i;
+                        this.tiles[i, col].SetMergeStatus(false);
                     }
                     else
                     {
-                        _tiles[i, col] = new Tile(0, i, col);
+                        this.tiles[i, col] = new Tile(0, i, col);
                     }
                 }
             }
@@ -199,7 +199,7 @@ namespace _2048.Models
             var tiles = new List<Tile>();
             for (var i = 0; i < Size; i++)
             {
-                var tile = isRow ? _tiles[index, isReverse ? Size - 1 - i : i] : _tiles[isReverse ? Size - 1 - i : i, index];
+                var tile = isRow ? this.tiles[index, isReverse ? Size - 1 - i : i] : this.tiles[isReverse ? Size - 1 - i : i, index];
                 if (tile.Value != 0)
                 {
                     tiles.Add(tile);
@@ -231,7 +231,7 @@ namespace _2048.Models
             {
                 for (var j = 0; j < Size; j++)
                 {
-                    if (_tiles[i, j].Value == 0) 
+                    if (tiles[i, j].Value == 0) 
                         return true;
                 }
             }
@@ -241,7 +241,7 @@ namespace _2048.Models
             {
                 for (var j = 0; j < Size-1; j++)
                 {
-                    if (_tiles[i, j].Value == _tiles[i, j+1].Value) 
+                    if (tiles[i, j].Value == tiles[i, j+1].Value) 
                         return true;
                 }
             }
@@ -251,7 +251,7 @@ namespace _2048.Models
             {
                 for (var i = 0; i < Size-1; i++)
                 {
-                    if (_tiles[i, j].Value == _tiles[i+1, j].Value) 
+                    if (tiles[i, j].Value == tiles[i+1, j].Value) 
                         return true;
                 }
             }
