@@ -105,10 +105,6 @@ namespace _2048.Views
                 case 32: return (SolidColorBrush)new BrushConverter().ConvertFrom("#69627A");
                 case 64: return (SolidColorBrush)new BrushConverter().ConvertFrom("#71627A");
                 case 128: return (SolidColorBrush)new BrushConverter().ConvertFrom("#7A627A");
-                case 256: return (SolidColorBrush)new BrushConverter().ConvertFrom("#7A627A");
-                case 512: return (SolidColorBrush)new BrushConverter().ConvertFrom("#7A627A");
-                case 1024: return (SolidColorBrush)new BrushConverter().ConvertFrom("#7A627A");
-                case 2048: return (SolidColorBrush)new BrushConverter().ConvertFrom("#7A627A");
                 default: return (SolidColorBrush)new BrushConverter().ConvertFrom("#7A627A");
             }
         }

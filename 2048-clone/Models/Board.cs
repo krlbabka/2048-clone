@@ -155,7 +155,7 @@ namespace _2048.Models
                 var tiles = FetchTiles(true, row, true);
                 CombineTiles(tiles);
                 
-                // Place the tiles back starting from the rightmost column and reset merge status
+                // Place the tiles back and reset merge status
                 for (var i = Size - 1; i >= 0; i--)
                 {
                     if (i >= Size - tiles.Count)
@@ -196,6 +196,7 @@ namespace _2048.Models
             }
         }
 
+        // Fetches all non-empty tiles in a row or column
         private List<Tile> FetchTiles(bool isRow, int index, bool isReverse)
         {
             var tiles = new List<Tile>();
@@ -210,6 +211,7 @@ namespace _2048.Models
             return tiles;
         }
         
+        // Combines tiles if they have the same value and have not been merged this iteration
         private void CombineTiles(List<Tile> tiles)
         {
             for (var i = 0; i < tiles.Count - 1; i++)
