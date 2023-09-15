@@ -6,9 +6,9 @@ namespace _2048.Models
     public class Board
     {
         private const int Size = 4;
-        private readonly Tile[,] _tiles = new Tile[Size,Size];
+        public readonly Tile[,] _tiles = new Tile[Size,Size];
         private readonly Random _random = new Random();
-        public int Score { get; private set; }
+        public int Score { get; set; }
         
         
         // Directions for possible tile moves.
@@ -50,7 +50,7 @@ namespace _2048.Models
         }
         
         // Add a random 2(90%) or 4(10%) tile to an available spot on the board.
-        private void AddRandomTile()
+        public void AddRandomTile()
         {
             List<(int, int)> availableTiles = new List<(int, int)>();
 
@@ -74,7 +74,7 @@ namespace _2048.Models
             }
         }
 
-        // Moves tiles in the specified direction, merges tiles if possible, and adds a random tile
+        // Moves tiles in the specified direction
         public void Move(Direction direction)
         {
             if (!CanMove(direction, _tiles)) return;
@@ -94,9 +94,6 @@ namespace _2048.Models
                     MoveDown();
                     break;
             }
-            
-            // After each move, add a random tile.
-            AddRandomTile();
         }
 
         // Methods for moving tiles in each direction.
@@ -263,7 +260,7 @@ namespace _2048.Models
         }
         
         // Determines if a direction is a valid move
-        bool CanMove(Direction direction, Tile[,] tiles)
+        public bool CanMove(Direction direction, Tile[,] tiles)
         {
             switch (direction)
             {

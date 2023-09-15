@@ -8,7 +8,7 @@
 
 1. **Zahájení hry**: Po spuštění hry se zobrazí mřížka se dvěma dlaždicemi, které mají hodnotu `2`, nebo vzácněji `4`.
 
-2. **Přesunutí dlaždic**: Pomocí kláves se šipkami (`Nahoru`, `Dolů`, `Vlevo`, `Vpravo`) se posouvají všechny destičky na hrací ploše zvoleným směrem až ke kraji.
+2. **Přesunutí dlaždic**: Pomocí kláves se šipkami nebo WASD (`Nahoru`, `Vlevo`, `Dolů`, `Vpravo`) se posouvají všechny destičky na hrací ploše zvoleným směrem až ke kraji.
 
 3. **Spojování dlaždic**: Když se dvě destičky se stejnou hodnotou setkají, spojí se do jedné se svou kombinovanou hodnotou.
 
@@ -64,7 +64,7 @@ Třída `Board` představuje herní plochu a hlavní kostru pro hru 2048. Je zod
    - **ResetBoard()**: Vrátí desku do počátečního stavu se dvěma náhodnými destičkami pro zahájení hry.
    - **GetTileAt()**: Vrátí objekt `Tile` na zadaném řádku a sloupci.
    - **AddRandomTile()**: Přidá novou dlaždici na náhodné volné místo na desce (10% šance na hodnotu 4).
-   - **Move()**: Přesune destičky v zadaném směru, pokud je to možné, sloučí je a přidá náhodnou dlaždici, pokud je přesun platný.
+   - **Move()**: Přesune destičky v zadaném směru.
    - **MoveLeft()** | **MoveUp()** | **MoveRight()** | **MoveDown()**: Přesune destičky do daného směru a stejně hodnotné spojí (iteruje přes řádky / sloupce a hledá, jestli jsou na sloupci / řádce vedle sebe dvě, popř. s mezerou mezi nimi, stejně hodnotné destičky).
    - **FetchTiles()** a **CombineTiles()**: Pomocné metody pro pohyb destiček, `FetchTiles` vybere nenulové destičky z řádku / sloupce a `CombineTiles` spojí stejně hodnotné destičky.
    - **HasMovesLeft()**: Zkontroluje, zda na desce zbývají platné tahy.
@@ -87,14 +87,14 @@ Tento soubor obsahuje kód pro soubor `MainWindow.xaml`. Je zodpovědný za inic
     - `_gameBoard`: Instance třídy `Board`, která reprezentuje aktuální stav hry.
 
 2. **Key Events**:
-    - `OnPreviewKeyDown`: Detekuje stisknutí klávesy se šipkou a podle toho posouvá destičky.
+    - `OnPreviewKeyDown`: Detekuje stisknutí klávesy se šipkou / kláves WASD a podle toho posouvá destičky a přidá náhodnou dlaždici, pokud je přesun platný.
 
 3. Metody a funkce
 
    1. **StartGame()**: Inicializuje nebo resetuje herní plochu a skóre.
    2. **UpdateUI()**: Aktualizuje uživatelské rozhraní herní plochy tak, aby odpovídalo stavu `_gameBoard`.
    3. **OnRestartButtonClick()**: Obsluha události pro tlačítko `New Game`, restartuje hru.
-   4. **GetBackgroundForValue()**: Obsahuje barvy pozadí podle hodnot dlaždic, vrátí barvu pro hodnotu.
+   4. **GetBackgroundForValue()**: Vrací barvy pozadí podle hodnot dlaždic.
 
 #### BoardTests.cs
 

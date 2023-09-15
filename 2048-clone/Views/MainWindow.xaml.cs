@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -61,20 +62,31 @@ namespace _2048.Views
         {
             base.OnPreviewKeyDown(e);
 
+            Board.Direction? moveDirection = null;
             switch (e.Key)
             {
                 case Key.Up:
-                    _gameBoard.Move(Board.Direction.Up);
+                case Key.W:
+                    moveDirection = Board.Direction.Up;
                     break;
                 case Key.Down:
-                    _gameBoard.Move(Board.Direction.Down);
+                case Key.S:
+                    moveDirection = Board.Direction.Down;
                     break;
                 case Key.Left:
-                    _gameBoard.Move(Board.Direction.Left);
+                case Key.A:
+                    moveDirection = Board.Direction.Left;
                     break;
                 case Key.Right:
-                    _gameBoard.Move(Board.Direction.Right);
+                case Key.D:
+                    moveDirection = Board.Direction.Right;
                     break;
+            }
+
+            if (moveDirection.HasValue && _gameBoard.CanMove(moveDirection.Value, _gameBoard._tiles))
+            {
+                _gameBoard.Move(moveDirection.Value);
+                _gameBoard.AddRandomTile();
             }
 
             // Update UI & check end-game condition
@@ -93,20 +105,22 @@ namespace _2048.Views
         }
         
         // Tile color scheme
+        private static readonly Dictionary<int, string> TileColors = new Dictionary<int, string>
+        {
+            { 0, "#4D5160" },
+            { 2, "#627A70" },
+            { 4, "#62747A" },
+            { 8, "#626C7A" },
+            { 16, "#62637A" },
+            { 32, "#69627A" },
+            { 64, "#71627A" },
+            { 128, "#7A627A" },
+        };
         private Brush GetBackgroundForValue(int value)
         {
-            switch (value)
-            {
-                case 0: return (SolidColorBrush)new BrushConverter().ConvertFrom("#4D5160");
-                case 2: return (SolidColorBrush)new BrushConverter().ConvertFrom("#627A70");
-                case 4: return (SolidColorBrush)new BrushConverter().ConvertFrom("#62747A");
-                case 8: return (SolidColorBrush)new BrushConverter().ConvertFrom("#626C7A");
-                case 16: return (SolidColorBrush)new BrushConverter().ConvertFrom("#62637A");
-                case 32: return (SolidColorBrush)new BrushConverter().ConvertFrom("#69627A");
-                case 64: return (SolidColorBrush)new BrushConverter().ConvertFrom("#71627A");
-                case 128: return (SolidColorBrush)new BrushConverter().ConvertFrom("#7A627A");
-                default: return (SolidColorBrush)new BrushConverter().ConvertFrom("#7A627A");
-            }
+            if (TileColors.TryGetValue(value, out string color)) return (SolidColorBrush)new BrushConverter().ConvertFrom(color);
+            
+            return (SolidColorBrush)new BrushConverter().ConvertFrom("#7A627A");
         }
     }
 }
